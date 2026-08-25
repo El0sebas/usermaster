@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../widgets/custom_textfield.dart';
+import '../../widgets/custom_button.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({super.key});
@@ -18,15 +20,17 @@ class ForgotPasswordPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 24),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Correo electrónico',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
-              ),
+            
+            // Usando CustomTextField
+            const CustomTextField(
+              labelText: 'Correo electrónico',
+              prefixIcon: Icons.email,
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
+            
+            // Usando CustomButton
+            CustomButton(
+              text: 'Enviar enlace de recuperación',
               onPressed: () {
                 // Mostrar SnackBar
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -37,7 +41,6 @@ class ForgotPasswordPage extends StatelessWidget {
                 );
                 Navigator.pop(context); // Vuelve al login
               },
-              child: const Text('Enviar enlace de recuperación'),
             ),
           ],
         ),

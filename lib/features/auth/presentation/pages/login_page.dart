@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../widgets/custom_textfield.dart';
+import '../../widgets/custom_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,29 +33,29 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const Icon(Icons.lock_person, size: 80, color: Colors.blueAccent),
               const SizedBox(height: 32),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Correo electrónico',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
-                ),
+              
+              // 1. Usando tu CustomTextField para el correo
+              const CustomTextField(
+                labelText: 'Correo electrónico',
+                prefixIcon: Icons.email,
               ),
               const SizedBox(height: 16),
-              const TextField(
+              
+              // 2. Usando tu CustomTextField para la contraseña
+              const CustomTextField(
+                labelText: 'Contraseña',
+                prefixIcon: Icons.lock,
                 obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Contraseña',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
-                ),
               ),
               const SizedBox(height: 32),
-              _isLoading
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: _handleLogin,
-                      child: const Text('Ingresar', style: TextStyle(fontSize: 16)),
-                    ),
+              
+              // 3. Usando tu CustomButton (él mismo maneja el estado de carga)
+              CustomButton(
+                text: 'Ingresar',
+                onPressed: _handleLogin,
+                isLoading: _isLoading,
+              ),
+              
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => Navigator.pushNamed(context, AppRoutes.register),

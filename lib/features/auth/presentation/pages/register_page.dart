@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../widgets/custom_textfield.dart';
+import '../../widgets/custom_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -37,36 +39,45 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Nombre completo', border: OutlineInputBorder()),
+            // Usando CustomTextField para Nombre
+            const CustomTextField(
+              labelText: 'Nombre completo',
+              prefixIcon: Icons.person,
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Correo electrónico', border: OutlineInputBorder()),
+            
+            // Usando CustomTextField para Correo
+            const CustomTextField(
+              labelText: 'Correo electrónico',
+              prefixIcon: Icons.email,
             ),
             const SizedBox(height: 16),
-            TextField(
+            
+            // Usando CustomTextField para Contraseña
+            CustomTextField(
               controller: _passwordController,
+              labelText: 'Contraseña',
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Contraseña', border: OutlineInputBorder()),
+              prefixIcon: Icons.lock,
             ),
             const SizedBox(height: 16),
-            TextField(
+            
+            // Usando CustomTextField para Confirmar Contraseña (con errorText)
+            CustomTextField(
               controller: _confirmPasswordController,
+              labelText: 'Confirmar contraseña',
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Confirmar contraseña',
-                border: const OutlineInputBorder(),
-                errorText: _errorMessage,
-              ),
+              prefixIcon: Icons.lock_outline,
+              errorText: _errorMessage,
             ),
             const SizedBox(height: 32),
-            _isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: _handleRegister,
-                    child: const Text('Crear cuenta', style: TextStyle(fontSize: 16)),
-                  ),
+            
+            // Usando CustomButton (maneja el _isLoading internamente)
+            CustomButton(
+              text: 'Crear cuenta',
+              onPressed: _handleRegister,
+              isLoading: _isLoading,
+            ),
           ],
         ),
       ),
